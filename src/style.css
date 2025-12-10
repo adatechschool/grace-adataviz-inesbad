@@ -1,96 +1,158 @@
-/* :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background: #ffffff;
+  padding: 20px;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
+/* Conteneur principal */
 #app {
-  max-width: 1280px;
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vanilla:hover {
-  filter: drop-shadow(0 0 2em #f7df1eaa);
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+/* Barre de recherche */
+#app input[type="search"] {
+  width: 70%;
+  padding: 10px 14px;
+  font-size: 16px;
+  border: 1px solid black;
+  border-radius: 10px;
+  outline: none;
+  margin-bottom: 20px;
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+  padding: 10px 15px;
+  margin-left: 10px;
+  background: ghostwhite;
+  color: black;
+  border: solid 1px black;
+  border-radius: 10px;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  transition: 0.2s;
+  justify-content: center;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+button:hover {
+  background: #B79891;
+}
+
+/* ----- Conteneur de la grille ----- */
+#cards-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 cards par ligne */
+  gap: 20px; /* espace entre les cards */
+  margin-top: 20px;
+}
+
+/* ----- Cards des conseillers ----- */
+.card-person {
+  list-style: none;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px (0, 0, 0, 0.1);
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #ffffff; /* couleur de base des cards */
+}
+
+/* Couleurs alternées pour chaque card */
+.card-person:nth-child(3n+1) { background: #e5d2c4; }
+.card-person:nth-child(3n+2) { background: #f2ebe1; }
+.card-person:nth-child(3n+3) { background: #ac9c8f; }
+
+.card-person:hover {
+  transform: translateY(-4px);
+}
+
+/* Image */
+.card-person .photo {
+  width: 130px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+/* Textes principaux */
+.card-person h2 {
+  margin-top: 10px;
+  font-size: 22px;
+  color: #333;
+  text-align: center;
+}
+
+.card-person h3 {
+  font-size: 16px;
+  margin-top: 6px;
+  color: #555;
+  text-align: center;
+}
+
+/* Bouton Voir plus / Voir moins */
+.card-person button {
+  margin-top: 12px;
+  padding: 8px 12px;
+  background: white;
+  border-radius: 8px;
+  border: solid 1px black;
+  color: black;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.card-person button:hover {
+  background: #2f2f2f;
+}
+
+/* Bouton Charger plus centré sous la grille */
+button.load-more {
+  margin: 30px auto 0 auto;
+  display: block;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 10px;
+  border: 1px solid #B79891;
+  background: ghostwhite;
+  color: black;
+  transition: 0.2s;
+  border: solid 1px black;
+ 
+  
+}
+
+button.load-more:hover {
+  background: #B79891;
+  color: white;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  #cards-container {
+    grid-template-columns: repeat(2, 1fr); /* 2 cards par ligne */
   }
-  a:hover {
-    color: #747bff;
+}
+
+@media (max-width: 600px) {
+  #app input[type="search"] {
+    width: 60%;
+    padding: 9px 11px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    outline: none;
+    margin-bottom: 6px;
   }
-  button {
-    background-color: #f9f9f9;
+
+  #cards-container {
+    grid-template-columns: 1fr; /* 1 card par ligne sur mobile */
   }
-} */
+}
